@@ -1,12 +1,14 @@
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
+// All properties are mandatory unless you add a '?'
 type Props = {
     label: string;
-    theme?: "primary"
+    theme?: "primary";
+    alertText?: string;
 };
 
-export default function Button({label, theme}: Props){
+export default function Button({label, theme, alertText}: Props){
     if (theme === "primary"){
         return (
             <View style={[
@@ -30,7 +32,7 @@ export default function Button({label, theme}: Props){
         <View style = {styles.buttonContainer}>
             <Pressable
                 style = {styles.button}
-                onPress={() => alert("You pressed a button!")}>
+                onPress={() => alert("Message: " + alertText)}>
             <Text style = {styles.buttonLabel}>{label}</Text>
             </Pressable>
         </View>

@@ -15,6 +15,7 @@ export default function Index() {
       <View style = {styles.footerContainer}>
         <Button label = "Choose a photo" theme="primary"></Button>
         <Button label = "Use this photo"></Button>
+        <Button label = "Click me" alertText="Hello"></Button>
       </View>
       
       {/* <Text style={styles.text}>Hello World</Text> */}
