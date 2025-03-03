@@ -15,7 +15,7 @@ export default function Button({label, theme, alertText, onPress}: Props){
             <View style={[
                 //can define an array of styles for each item
                 styles.buttonContainer,
-                { borderWidth: 4, borderColor: "#ffd33d", borderRadius: 18},]}>
+                { borderWidth: 4, borderColor: "yellowgreen", borderRadius: 18},]}>
                 <Pressable style={[styles.button, {backgroundColor: "#fff"}]}
                     onPress={onPress}>
                     <FontAwesome

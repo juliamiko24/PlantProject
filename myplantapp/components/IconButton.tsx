@@ -20,7 +20,7 @@ export default function IconButton({icon, label, onPress}: Props)
 
 const styles = StyleSheet.create({
     iconButtonLabel:{
-        borderColor: "#fff",
+        color: "#fff",
         marginTop: 12
     },
     iconButton:{

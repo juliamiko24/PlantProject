@@ -5,21 +5,22 @@ export default function TabsLayout() {
   return (
   <Tabs
     screenOptions={{
-        tabBarActiveTintColor: "#ffd33d",
+        tabBarActiveTintColor: "#e9d9c7",
         headerStyle: {
-            backgroundColor: "#25292e"
+            backgroundColor: "#20201a"
         },
         headerShadowVisible: false,
         headerTintColor: "#fff",
         tabBarStyle: {
-            backgroundColor: "#25292e"
-        }
+            backgroundColor: "#20201a"
+        },
+        title: "My plant app",
     }}
     >
     <Tabs.Screen
         name = "index"
         options={{
-            headerShown: false,
+            headerShown: true,
             tabBarIcon: ({focused,color}) => (
                 <Ionicons
                     name = {focused ? "home-sharp" : "home-outline"}

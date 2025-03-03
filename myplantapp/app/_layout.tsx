@@ -11,6 +11,7 @@ export default function RootLayout() {
       <Stack>
       <Stack.Screen name = "(tabs)" options={{
         headerTitle: "My plant app",
+        headerShown: false,
         headerLeft: () => <></>
       }}
       />

@@ -4,6 +4,8 @@ import ImageViewer from "@/components/ImageViewer";
 import Button from "@/components/Buttons";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
+import IconButton from "@/components/IconButton"
+import CircleButton from "@/components/CircleButton";
 
 const PlaceHolderImage = require("../../assets/images/background-image.png");
 
@@ -33,19 +35,39 @@ export default function Index() {
     }
     }
 
+  const onReset = () =>
+  {
+    setShowAppOptions(false)
+  }
 
-  return (
+  const onAddSticker = () =>
+  {
+
+  }
+
+  const onSaveImageAsync = async () =>
+  {
+
+  }
+
+
+  return(
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={selectedImage || PlaceHolderImage}></ImageViewer>
       </View>
       {showAppOptions ? (
-        <View />
+        <View style={styles.optionsContainer}>
+          <View style = {styles.optionsRow}>
+            <IconButton icon = "refresh" label = "reset" onPress={onReset} />
+            <CircleButton onPress={onAddSticker} />
+            <IconButton icon="save-alt" label="save" onPress={onSaveImageAsync} />
+          </View>
+        </View>
       ) : (
         <View style = {styles.footerContainer}>
         <Button label = "Choose a photo" theme="primary" onPress={pickImageAsync}></Button>
         <Button label = "Use this photo" onPress={()=> setShowAppOptions(true)}></Button>
-        <Button label = "Click me" alertText="Hello"></Button>
       </View>
       )}
       
@@ -58,7 +80,7 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#25292e",
+    backgroundColor: "#20201a",
     flex: 1,
     alignItems: "center",
   },
@@ -68,5 +90,13 @@ const styles = StyleSheet.create({
   footerContainer:{
     flex: 1/3,
     alignItems: "center",
+  },
+  optionsContainer:{
+    position: "absolute",
+    bottom: 80,
+  },
+  optionsRow:{
+    alignItems: "center",
+    flexDirection: "row",
   }
 });
