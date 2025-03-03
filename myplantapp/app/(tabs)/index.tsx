@@ -13,23 +13,25 @@ export default function Index() {
   // this is a hook called useState from React that allows us to have a variable
   // can be a string or undefined (if user doesnt pick anything)
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+  const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
 
-const pickImageAsync = async () => {
-  let result = await ImagePicker.launchImageLibraryAsync({
-    allowsEditing: true, quality:1,
-  });
+  const pickImageAsync = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true, quality:1,
+    });
 
-  if (!result.canceled)
-  {
-    // result.assets is an array, the result of image will be at position 0 hence the [0]
-    setSelectedImage(result.assets[0].uri)
-    console.log(result);
-  }
-  else
-  {
-    alert("You did not select any image");
-  }
-  }
+    if (!result.canceled)
+    {
+      // result.assets is an array, the result of image will be at position 0 hence the [0]
+      setSelectedImage(result.assets[0].uri)
+      setShowAppOptions(true);
+      console.log(result);
+    }
+    else
+    {
+      alert("You did not select any image");
+    }
+    }
 
 
   return (
@@ -37,11 +39,16 @@ const pickImageAsync = async () => {
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={selectedImage || PlaceHolderImage}></ImageViewer>
       </View>
-      <View style = {styles.footerContainer}>
+      {showAppOptions ? (
+        <View />
+      ) : (
+        <View style = {styles.footerContainer}>
         <Button label = "Choose a photo" theme="primary" onPress={pickImageAsync}></Button>
-        <Button label = "Use this photo"></Button>
+        <Button label = "Use this photo" onPress={()=> setShowAppOptions(true)}></Button>
         <Button label = "Click me" alertText="Hello"></Button>
       </View>
+      )}
+      
       
       {/* <Text style={styles.text}>Hello World</Text> */}
       {/* <Link href={"/about"} style = {styles.button}> Go to About Screen </Link> */}
