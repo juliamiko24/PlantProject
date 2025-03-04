@@ -1,11 +1,17 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
+import { useState } from "react";
+
+import * as ImagePicker from "expo-image-picker";
+
+// my components
 import ImageViewer from "@/components/ImageViewer";
 import Button from "@/components/Buttons";
-import * as ImagePicker from "expo-image-picker";
-import { useState } from "react";
 import IconButton from "@/components/IconButton"
 import CircleButton from "@/components/CircleButton";
+import EmojiPicker from "@/components/EmojiPicker";
+import EmojiList from "@/components/EmojiList";
+import EmojiSticker from "@/components/EmojiSticker";
 
 const PlaceHolderImage = require("../../assets/images/background-image.png");
 
@@ -16,6 +22,8 @@ export default function Index() {
   // can be a string or undefined (if user doesnt pick anything)
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [pickedEMoji, setPickedEmoji] = useState<string | undefined>(undefined);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -35,18 +43,19 @@ export default function Index() {
     }
     }
 
-  const onReset = () =>
-  {
+  const onReset = () => {
     setShowAppOptions(false)
   }
 
-  const onAddSticker = () =>
-  {
-
+  const onModalClose = () => {
+    setIsModalVisible(false);
   }
 
-  const onSaveImageAsync = async () =>
-  {
+  const onAddSticker = () => {
+    setIsModalVisible(true);
+  }
+
+  const onSaveImageAsync = async () => {
 
   }
 
@@ -55,6 +64,8 @@ export default function Index() {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={selectedImage || PlaceHolderImage}></ImageViewer>
+        {pickedEMoji && (
+          <EmojiSticker imageSize={40} stickerSource={pickedEMoji}></EmojiSticker>)}
       </View>
       {showAppOptions ? (
         <View style={styles.optionsContainer}>
@@ -70,6 +81,9 @@ export default function Index() {
         <Button label = "Use this photo" onPress={()=> setShowAppOptions(true)}></Button>
       </View>
       )}
+      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose}></EmojiList>
+      </EmojiPicker>
       
       
       {/* <Text style={styles.text}>Hello World</Text> */}

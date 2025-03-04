@@ -14,7 +14,8 @@ export default function TabsLayout() {
         tabBarStyle: {
             backgroundColor: "#20201a"
         },
-        title: "My plant app",
+        headerTitle: "Julia's plant app",
+        headerTitleAlign: "center"
     }}
     >
     <Tabs.Screen
